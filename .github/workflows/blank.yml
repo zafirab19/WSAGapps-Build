@@ -1,0 +1,45 @@
+name: WSAWithGapps
+
+on:
+pull_request:
+branches:
+- main
+
+jobs:
+build-test-branch:
+name: Build WSAPackage
+
+runs-on: ubuntu-latest
+
+steps:
+
+- uses: actions/checkout@v2
+
+- name: Setup .net core
+uses: actions/setup-dotnet@v1
+with:
+dotnet-version: 3.1.301
+
+- name: install dependencies
+run: dotnet restore "${{ github.workspace }}/mywebapp/mywebapp.csproj"
+
+- name: Build
+run: dotnet build "${{ github.workspace }}/mywebapp/mywebapp.csproj" --configuration Release --no-resotre
+
+- name: Test
+run: dotnet test "${{ github.workspace }}/mywebapp/mywebapp.csproj" --no-restore --verbosity normal
+
+- name: Publish
+run: |
+dotnet publish "${{ github.workspace }}/mywebapp/mywebapp.csproj" -c Release -o mywebapp
+
+ - name: Upload a Build Artifact
+uses: actions/upload-artifact@v2.2.0
+with:
+
+name: WSAwithGapps_fromWZ_2205.40000.14.0_nightly
+path: wsapackage/**
+
+if-no-files-found: error
+
+retention-days: 90 
