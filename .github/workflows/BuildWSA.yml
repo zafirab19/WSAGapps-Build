@@ -1,0 +1,21 @@
+# Publish GitHub workflow artifacts totorial example
+name: Publish Github Actions Artifact Example
+on:
+push:
+branches: [main]
+jobs:
+archive-build-artifacts:
+runs-on: ubuntu-latest
+steps:
+- name: Step1 - Crate a temporary  artifact downloads folder
+run: mkdir downloads
+- name: step 2 - Add artifacts to publish to the temp folder
+run:
+ cd downloads
+echo 'WSAwithGapps_fromWZ_2205.40000.14.0_nightly' > WSAwithGapps_fromWZ_2205.40000.14.0_nightly.rar
+cd ..
+- name: step3 - use the Upload Artifact GitHub Action
+uses: actions/upload-artifact@v3
+with:
+name: WSAwithGapps_fromWZ_2205.40000.14.0_nightly
+path: downloads
