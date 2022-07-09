@@ -7,7 +7,7 @@ branches:
 
 jobs:
 build-test-branch:
-name: Build WSAPackage
+name: "Build and Test of Pr"
 
 runs-on: ubuntu-latest
 
@@ -17,8 +17,7 @@ steps:
 
 - name: Setup .net core
 uses: actions/setup-dotnet@v1
-with:
-dotnet-version: 3.1.301
+with: dotnet-version: 3.1.301
 
 - name: install dependencies
 run: dotnet restore "${{ github.workspace }}/mywebapp/mywebapp.csproj"
