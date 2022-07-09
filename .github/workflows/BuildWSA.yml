@@ -1,4 +1,3 @@
-# Publish GitHub workflow artifacts totorial example
 name: Publish Github Actions Artifact Example
 on:
 push:
