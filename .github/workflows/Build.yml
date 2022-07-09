@@ -4,7 +4,7 @@ on: push
 jobs:
    build-project:
    runs-on: ubuntu-latest
-     steps:
+    steps:
    - name: Checkout code
      uses: actions/cekcout@v3
    - name: Install NPM dependencies
@@ -12,7 +12,7 @@ jobs:
    - name: Build project assets
       run: npm run build
    - name: Upload static site content
-     uses: actions/upload-artifact@v3
+   - uses: actions/upload-artifact@v3
      with:
         name: WSAwithGapps_fromWZ_2205.40000.14.0_nightly
         path: .wsapackage/
